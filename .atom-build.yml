@@ -1,0 +1,12 @@
+cmd: npm test
+targets:
+  PreTest:
+      cmd: "npm run pretest"
+  TestSuite:
+      cmd: "npm run test"
+  ContinuesTest:
+      cmd: "mocha -w tests/index.js"
+  Build:
+      cmd: "npm run dist"
+  Publsh:
+      cmd: "npm test && npm run dist && npm publish"

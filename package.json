@@ -1,0 +1,42 @@
+{
+	"name": "correntlywallet",
+	"version": "0.9.0",
+	"description": "Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market",
+	"keywords": [
+		"ethereum",
+		"wallet",
+		"blockchain",
+		"energy",
+		"corrently"
+	],
+	"homepage": "https://github.com/energychain/CorrentlyWallet#readme",
+	"bugs": {
+		"url": "https://github.com/energychain/CorrentlyWallet/issues"
+	},
+	"license": "Apache-2.0",
+	"author": "Corrently Corp <support@corrently.com>",
+	"main": "src/index.js",
+	"directories": {
+		"lib": "lib",
+		"test": "tests"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/energychain/CorrentlyWallet.git"
+	},
+	"scripts": {
+		"test": "mocha --harmony -r esm --reporter spec tests/index.js",
+		"pretest": "eslint --ignore-path .gitignore src/"
+	},
+	"dependencies": {
+		"ethers": "^4.0.1",
+		"request": "^2.88.0"
+	},
+	"devDependencies": {
+		"eslint": "^5.6.1",
+		"eslint-config-strongloop": "^2.1.0",
+		"eslint-plugin-jasmine": "^2.10.1",
+		"esm": "^3.0.84",
+		"mocha": "^5.2.0"
+	}
+}
