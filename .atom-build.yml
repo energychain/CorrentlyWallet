@@ -8,5 +8,7 @@ targets:
       cmd: "mocha -w tests/index.js"
   Build:
       cmd: "npm run dist"
+  Documentation:
+      cmd: "npm run doc"
   Publsh:
       cmd: "npm test && npm run dist && npm publish"

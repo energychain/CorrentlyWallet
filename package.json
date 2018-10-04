@@ -26,7 +26,9 @@
 	},
 	"scripts": {
 		"test": "mocha --harmony -r esm --reporter spec tests/index.js",
-		"pretest": "eslint --ignore-path .gitignore src/"
+		"pretest": "eslint --ignore-path .gitignore src/",
+		"dist": "npx webpack",
+		"doc": "jsdoc -d docs/ src/index.js"
 	},
 	"dependencies": {
 		"ethers": "^4.0.1",
