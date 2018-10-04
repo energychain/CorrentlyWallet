@@ -1,11 +1,10 @@
 # CorrentlyWallet
 **Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.**
 
-[![npm version](https://badge.fury.io/js/correntlynote.svg)](https://badge.fury.io/js/correntlynote) [![Greenkeeper badge](https://badges.greenkeeper.io/energychain/CorrentlyNote.svg)](https://greenkeeper.io/)
-[ ![Codeship Status for energychain/CorrentlyNote](https://app.codeship.com/projects/c8ff01f0-a59b-0136-c3e5-566495418824/status?branch=master)](https://app.codeship.com/projects/308079)
-[![Build Status](https://travis-ci.org/energychain/CorrentlyNote.svg?branch=master)](https://travis-ci.org/energychain/CorrentlyNote)
-[![Coverage Status](https://coveralls.io/repos/github/energychain/CorrentlyNote/badge.svg?branch=master)](https://coveralls.io/github/energychain/CorrentlyNote?branch=master)
-[![CircleCI](https://circleci.com/gh/energychain/CorrentlyNote.svg?style=svg)](https://circleci.com/gh/energychain/CorrentlyNote)
+[![npm version](https://badge.fury.io/js/correntlywallet.svg)](https://badge.fury.io/js/correntlywallet) [![Greenkeeper badge](https://badges.greenkeeper.io/energychain/CorrentlyWallet.svg)](https://greenkeeper.io/)
+[ ![Codeship Status for energychain/CorrentlyWallet](https://app.codeship.com/projects/1851a8e0-aa17-0136-d403-2eaeeac4cf7b/status?branch=master)](https://app.codeship.com/projects/309008)
+[![Build Status](https://travis-ci.org/energychain/CorrentlyWallet.svg?branch=master)](https://travis-ci.org/energychain/CorrentlyWallet)
+[![CircleCI](https://circleci.com/gh/energychain/CorrentlyWallet.svg?style=svg)](https://circleci.com/gh/energychain/CorrentlyWallet)
 
 ## Motivation
 Using distributed ledger technology it should be easy to buy energy generation capacity (parts of PV plants, Windparks, etc...) and gain value (electricity) from this digital this property.  Aim of CorrentlyWallet is to have a library that takes advantage of Blockchain, Renewable Energy Generation and modern WebTechnology.
