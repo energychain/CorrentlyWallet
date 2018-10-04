@@ -29,11 +29,6 @@ Using 'wallet.deleteData(address)' allows to delete all referenced data and dest
 npm -i correntlywallet
 ```
 
-### via Browser
-```
-<script src=""></script>
-```
-
 ## Contributing
 - https://stromdao.de/
 - https://gitter.im/corrently/Token
