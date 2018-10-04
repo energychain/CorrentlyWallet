@@ -1,6 +1,6 @@
 {
 	"name": "correntlywallet",
-	"version": "0.9.1",
+	"version": "0.9.2",
 	"description": "Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market",
 	"keywords": [
 		"ethereum",
@@ -15,7 +15,7 @@
 	},
 	"license": "Apache-2.0",
 	"author": "Corrently Corp <support@corrently.com>",
-	"main": "src/index.js",
+	"main": "dist/index.js",
 	"directories": {
 		"lib": "lib",
 		"test": "tests"
