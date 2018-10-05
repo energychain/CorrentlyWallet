@@ -100,6 +100,32 @@ ethers.Wallet.prototype.buyCapacity = function(asset, quantity) {
   });
 };
 
+/**
+ * @function deletePending
+  *@desc Delete a pending transaction from q
+ * @param {string} nonce nonce of a pending transaction
+ */
+ethers.Wallet.prototype.deletePending = function(nonce) {
+  let parent = this;
+  return new Promise(function(resolve, reject) {
+    parent._retrieveCoriAccount().then(function(account) {
+      let transaction = {};
+      transaction.nonce = nonce;
+      parent.signMessage(JSON.stringify(transaction)).then(function(signature) {
+        delete parent.twin;
+        const options = {
+          url: ethers.CORRENTLY.API + 'deletePending?transaction=' + encodeURI(JSON.stringify(transaction)) + '&signature=' + signature,
+          timeout: 20000,
+        };
+        request(options, function(e, r, b) {
+          let results = JSON.parse(b);
+          resolve(results.result);
+        });
+      });
+    });
+  });
+};
+
 ethers.Wallet.prototype._retrieveCoriAccount = function() {
   let parent = this;
   return new Promise(function(resolve, reject) {

@@ -130,6 +130,12 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
         done();
     });
   });
+  it('Delete pending transaction (has nonce=0)', function(done) {
+    wallet.deletePending(0).then(function(transaction) {
+        assert.equal(transaction.txs.length < account.txs.length, true);
+        done();
+    });
+  });
   describe('GDPR Compliance', function() {
     it('Delete account references', function(done) {
       wallet.deleteData(wallet.address).then(function(transaction) {
