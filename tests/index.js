@@ -111,11 +111,11 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
         done();
     });
   });
-  it('Wait 10 seconds in order to have some generation', function(done) {
+  it('Wait 15 seconds in order to have some generation', function(done) {
     this.timeout(300000);
     setTimeout(function() {
       done();
-    },10000);
+    },15000);
   });
   it('Validate generation is > 0', function(done) {
     CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(_account) {
