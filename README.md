@@ -37,7 +37,7 @@ Households receive 1 Corrently (digital currency) per 1 Kilo-Watt-Hour consumpti
 ### CORI
 A CORI is a ERC20-Token [0x725b190bc077ffde17cf549aa8ba25e298550b18](https://etherscan.io/token/0x725b190bc077ffde17cf549aa8ba25e298550b18) backed by 1 Kilo-Watt-Hour generation per year.
 
-## [Documentation](https://wallet.corrently.com/)
+## [API Documentation](https://wallet.corrently.com/)
 
 ## Contributing
 - https://stromdao.de/
