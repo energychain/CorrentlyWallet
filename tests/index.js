@@ -111,6 +111,13 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
         done();
     });
   });
+  it('Link confirmed consumption with wallet', function(done) {
+    wallet.linkDemand('0x9d28463d51aC40662865D2462e80825D4DBB41d5').then(function(transaction) {
+        assert.equal(transaction.ja > 0, true);
+        assert.equal(account.ja, 0);
+        done();
+    });
+  });
   it('Wait 15 seconds in order to have some generation', function(done) {
     this.timeout(300000);
     setTimeout(function() {
@@ -144,9 +151,8 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
       });
     });
     it('Validate all references got deleted', function(done) {
-        CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(_account) {
+        CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(_account) {          
           assert.equal(_account.txs.length,0);
-          assert.equal(account.created < _account.created,true);
           done();
         });
     });

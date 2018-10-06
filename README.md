@@ -29,6 +29,14 @@ Using 'wallet.deleteData(address)' allows to delete all referenced data and dest
 npm -i correntlywallet
 ```
 
+## Concepts
+
+### Corrently
+Households receive 1 Corrently (digital currency) per 1 Kilo-Watt-Hour consumption.
+
+### CORI
+A CORI is a ERC20-Token [0x725b190bc077ffde17cf549aa8ba25e298550b18](https://etherscan.io/token/0x725b190bc077ffde17cf549aa8ba25e298550b18) backed by 1 Kilo-Watt-Hour generation per year.
+
 ## Contributing
 - https://stromdao.de/
 - https://gitter.im/corrently/Token
