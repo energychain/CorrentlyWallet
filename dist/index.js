@@ -36,7 +36,7 @@ ethers.CorrentlyAccount = function (address) {
     ethers.utils._retrieveCoriAccount(address).then(function (twin) {
       twin.getCoriEquity = function () {
         var cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, ethers.getDefaultProvider('homestead'));
-        return cori_contract.balanceOf(address);
+        return cori_contract.balanceOf(address) / 100;
       };
       resolve(twin);
     });
