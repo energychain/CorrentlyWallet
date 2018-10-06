@@ -21,8 +21,7 @@ var request = require('request');
 ethers.CORRENTLY = {
   ERC20ABI: require('./ERC20ABI.json'),
   CORI_ADDRESS: '0x725b190bc077ffde17cf549aa8ba25e298550b18',
-  //  API: 'https://api.corrently.de/latest/',
-  API: 'https://2le29wvge7.execute-api.eu-central-1.amazonaws.com/latest/'
+  API: 'https://api.corrently.de/'
 };
 
 /**
@@ -99,6 +98,32 @@ ethers.Wallet.prototype.buyCapacity = function (asset, quantity) {
             var results = JSON.parse(b);
             resolve(results.result);
           });
+        });
+      });
+    });
+  });
+};
+
+/**
+ * @function deletePending
+  *@desc Delete a pending transaction from q
+ * @param {string} nonce nonce of a pending transaction
+ */
+ethers.Wallet.prototype.deletePending = function (nonce) {
+  var parent = this;
+  return new Promise(function (resolve, reject) {
+    parent._retrieveCoriAccount().then(function (account) {
+      var transaction = {};
+      transaction.nonce = nonce;
+      parent.signMessage(JSON.stringify(transaction)).then(function (signature) {
+        delete parent.twin;
+        var options = {
+          url: ethers.CORRENTLY.API + 'deletePending?transaction=' + encodeURI(JSON.stringify(transaction)) + '&signature=' + signature,
+          timeout: 20000
+        };
+        request(options, function (e, r, b) {
+          var results = JSON.parse(b);
+          resolve(results.result);
         });
       });
     });
