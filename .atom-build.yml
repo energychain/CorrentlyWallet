@@ -10,5 +10,5 @@ targets:
       cmd: "npm run dist"
   Documentation:
       cmd: "npm run doc"
-  Publsh:
-      cmd: "npm test && npm run dist && npm publish"
+  Publish:
+      cmd: "npm test && npm run doc && git add -A && git commit -a -m 'Release Candidate' && npm run dist && npm publish"

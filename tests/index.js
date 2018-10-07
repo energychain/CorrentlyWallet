@@ -60,6 +60,7 @@ describe('Consensus validation (CORI and Corrently)', function() {
   });
 });
 describe('Well known Account validation (STROMDAO Demo User)', function() {
+  /*
   it('Validate earned Corrently and converted to CORI', function(done) {
     CorrentlyWallet.CorrentlyAccount('0xe596B918cC07852dfA41dd7181492720C261C8E5').then(function(account) {
         assert.equal(account.totalSupply > 0, true);
@@ -69,6 +70,7 @@ describe('Well known Account validation (STROMDAO Demo User)', function() {
         done();
     });
   });
+  */
   it('Validate if it holds property confirmed in blockchain', function(done) {
     CorrentlyWallet.CorrentlyAccount('0xe596B918cC07852dfA41dd7181492720C261C8E5').then(function(account) {
         done();
@@ -151,7 +153,7 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
       });
     });
     it('Validate all references got deleted', function(done) {
-        CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(_account) {          
+        CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(_account) {
           assert.equal(_account.txs.length,0);
           done();
         });
