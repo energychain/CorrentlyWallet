@@ -29,7 +29,7 @@ ethers.CorrentlyAccount = function(address) {
   return new Promise(function(resolve, reject) {
     ethers.utils._retrieveCoriAccount(address).then(function(twin) {
       twin.getCoriEquity = function() {
-        const cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, ethers.getDefaultProvider('homestead'));
+        const cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, ethers.providers.getDefaultProvider('homestead'));
 
         return new Promise(function(resolve2, reject) {
           cori_contract.balanceOf(address).then(function(balance) {
@@ -53,16 +53,18 @@ ethers.Wallet.prototype.deleteData = function(address) {
     let transaction = {};
     transaction.timeStamp = new Date().getTime();
 
-    parent.signMessage(JSON.stringify(transaction)).then(function(signature) {
-      const options = {
-        url: ethers.CORRENTLY.API + 'deleteTwin?&signature=' + signature + '&transaction=' + encodeURI(JSON.stringify(transaction)),
-        timeout: 20000,
-      };
-      request(options, function(e, r, b) {
-        let results = JSON.parse(b);
-        resolve(results);
-      });
+    let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
+    let signature = parent.sign({data: hash});
+
+    const options = {
+      url: ethers.CORRENTLY.API + 'deleteTwin?&signature=' + signature + '&hash=' + hash + '&transaction=' + encodeURI(JSON.stringify(transaction)),
+      timeout: 20000,
+    };
+    request(options, function(e, r, b) {
+      let results = JSON.parse(b);
+      resolve(results);
     });
+
   });
 };
 
@@ -88,16 +90,18 @@ ethers.Wallet.prototype.buyCapacity = function(asset, quantity) {
         transaction.asset = asset.contract;
         transaction.eth = 0;
         transaction.nonce = account.txs.length;
-        parent.signMessage(JSON.stringify(transaction)).then(function(signature) {
-          delete parent.twin;
-          const options = {
-            url: ethers.CORRENTLY.API + 'signedTransaction?transaction=' + encodeURI(JSON.stringify(transaction)) + '&signature=' + signature,
-            timeout: 20000,
-          };
-          request(options, function(e, r, b) {
-            let results = JSON.parse(b);
-            resolve(results.result);
-          });
+
+        let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
+        let signature = parent.sign({data: hash});
+
+        delete parent.twin;
+        const options = {
+          url: ethers.CORRENTLY.API + 'signedTransaction?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+          timeout: 20000,
+        };
+        request(options, function(e, r, b) {
+          let results = JSON.parse(b);
+          resolve(results.result);
         });
       });
     });
@@ -114,15 +118,16 @@ ethers.Wallet.prototype.linkDemand = function(ethereumAddress) {
   return new Promise(function(resolve, reject) {
     let transaction = {};
     transaction.link = ethereumAddress;
-    parent.signMessage(JSON.stringify(transaction)).then(function(signature) {
-      const options = {
-        url: ethers.CORRENTLY.API + 'link?transaction=' + encodeURI(JSON.stringify(transaction)) + '&signature=' + signature,
-        timeout: 20000,
-      };
-      request(options, function(e, r, b) {
-        let results = JSON.parse(b);
-        resolve(results.result);
-      });
+    let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
+    let signature = parent.sign({data: hash});
+
+    const options = {
+      url: ethers.CORRENTLY.API + 'link?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+      timeout: 20000,
+    };
+    request(options, function(e, r, b) {
+      let results = JSON.parse(b);
+      resolve(results.result);
     });
   });
 };
@@ -135,7 +140,7 @@ ethers.Wallet.prototype.linkDemand = function(ethereumAddress) {
  */
 ethers.Wallet.prototype.transferCapacity = function(ethereumAddress, kilowatthours) {
   return new Promise(function(resolve, reject) {
-    const cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, ethers.getDefaultProvider('homestead'));
+    const cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, ethers.providers.getDefaultProvider('homestead'));
     cori_contract.transfer(ethereumAddress, Math.round(kilowatthours * 100)).then(function(tx) {
       resolve(tx);
     });
@@ -155,16 +160,18 @@ ethers.Wallet.prototype.deletePending = function(nonce) {
     parent._retrieveCoriAccount().then(function(account) {
       let transaction = {};
       transaction.nonce = nonce;
-      parent.signMessage(JSON.stringify(transaction)).then(function(signature) {
-        delete parent.twin;
-        const options = {
-          url: ethers.CORRENTLY.API + 'deletePending?transaction=' + encodeURI(JSON.stringify(transaction)) + '&signature=' + signature,
-          timeout: 20000,
-        };
-        request(options, function(e, r, b) {
-          let results = JSON.parse(b);
-          resolve(results.result);
-        });
+
+      let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
+      let signature = parent.sign({data: hash});
+
+      delete parent.twin;
+      const options = {
+        url: ethers.CORRENTLY.API + 'deletePending?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+        timeout: 20000,
+      };
+      request(options, function(e, r, b) {
+        let results = JSON.parse(b);
+        resolve(results.result);
       });
     });
   });

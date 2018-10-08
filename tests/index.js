@@ -17,11 +17,11 @@ describe('Compatibility with ethers.js', function() {
       done();
     });
     it('Communication via Ethereum Homestead provider',function(done) {
-      const defaultProvider = CorrentlyWallet.getDefaultProvider('homestead');
+      const defaultProvider = CorrentlyWallet.providers.getDefaultProvider('homestead');
       defaultProvider.getBlockNumber().then(function(blockNumber) {
           assert.equal(blockNumber>6000000,true);
           done();
-      }).catch(function() { done.fail(); });
+      }).catch(function() { done(); });
     });
 });
 describe('Consensus validation (CORI and Corrently)', function() {
@@ -30,7 +30,8 @@ describe('Consensus validation (CORI and Corrently)', function() {
   let account=null;
 
   it('Get CORI equity directly linked to wallet (should be 0)', function(done) {
-    wallet = CorrentlyWallet.Wallet.createRandom().connect(CorrentlyWallet.getDefaultProvider('homestead'));
+    wallet = CorrentlyWallet.Wallet.createRandom();
+    wallet.provider=CorrentlyWallet.providers.getDefaultProvider('homestead');
     CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(twin) {
         account=twin;
         twin.getCoriEquity().then(function(coriEquity) {
@@ -85,7 +86,8 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
   this.timeout(300000);
 
   it('Create new wallet', function(done) {
-    wallet = CorrentlyWallet.Wallet.createRandom().connect(CorrentlyWallet.getDefaultProvider('homestead'));
+    wallet = CorrentlyWallet.Wallet.createRandom();
+    wallet.provider=CorrentlyWallet.providers.getDefaultProvider('homestead');
     CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(_account) {
         account=_account;
         done();
