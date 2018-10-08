@@ -30,6 +30,14 @@
     .container {
       margin-bottom:60px;
     }
+    body {
+      background-image: url('https://app.corrently.de/imgs/corrently_logo.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: left top;
+      padding-top:80px;
+      padding-left:30px;
+    }
     </style>
     <!-- build:css -->
     <link rel="stylesheet" href="./css/main.css">
@@ -37,7 +45,12 @@
   </head>
 
   <body>
-        <h1>CorentlyWallet</h1>
+        <form action="#" method="GET">
+            <label for="a">Account to view:</label>
+            <input type="text" name="a" id="a" placehold="0x12345678901234ab1234.." size="60">
+            <button type="submit">Open</button>
+        </form>
+        <h1>Wallet</h1>
         <p>Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.</p>
         <h2>Account: <span class="address"></span></h2>
         <table>

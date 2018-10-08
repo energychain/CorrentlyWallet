@@ -1,8 +1,19 @@
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return decodeURI(results[1]) || 0;
+    }
+}
+
 const  cw = CorrentlyWallet.default;
 const backend = "https://api.corrently.de/"
 let wallet = null;
 
 const getAccountInfo=function(address) {
+  $('#a').val(address);
   $.getJSON(backend+"totalSupply?account="+address,function(data) {
       $('.totalCollected').html(data.result.totalSupply);
       $('.converted').html(data.result.convertedSupply);
@@ -24,7 +35,10 @@ if(window.localStorage.getItem("privateKey")==null) {
 } else {
   wallet = new cw.Wallet(window.localStorage.getItem("privateKey"));
 }
-
-$('.address').html(wallet.address);
-
-getAccountInfo(wallet.address);
+if($.urlParam("a")==null) {
+  $('.address').html(wallet.address);
+  getAccountInfo(wallet.address);
+} else {
+  $('.address').html($.urlParam("a"));
+  getAccountInfo($.urlParam("a"));
+}
