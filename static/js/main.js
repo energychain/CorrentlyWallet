@@ -6,8 +6,14 @@ const getAccountInfo=function(address) {
   $.getJSON(backend+"totalSupply?account="+address,function(data) {
       $('.totalCollected').html(data.result.totalSupply);
       $('.converted').html(data.result.convertedSupply);
+      $('.generation').html(data.result.generation);
+      $('.consumption').html(data.result.meteredconsumption);
+      $('.nominalCori').html(data.result.nominalCori);
+      $('.imbalance').html(data.result.generation-data.result.meteredconsumption);
       $('.available').html(data.result.totalSupply-data.result.convertedSupply);
-      console.log(data);
+      $('.validFrom').html(new Date(data.result.created).toLocaleString());
+      $('.updated').html(new Date(data.result.lastUpdate).toLocaleString());
+      console.log(data.result);
   });
 }
 

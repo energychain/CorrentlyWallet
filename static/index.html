@@ -40,23 +40,19 @@
         <h1>CorentlyWallet</h1>
         <p>Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.</p>
         <h2>Account: <span class="address"></span></h2>
-<!--
-        Yearly Demand:			0 kWh
-        Total Collected:		100 Corrently
-        Converted:			0 Corrently
-        Available:			100 Corrently
-        Valid from:			2018-10-8 16:10:56
-        Nominal Generation:		0 kWh/year
-        Confirmed Generation Equity:	0 kWh/year
-        Metered Generation:		0 kWh
-        Metered Consumption:		0 kWh
-        ./. Imbalance:			0 kWh
-        ETH Balance:			0.0 ETH
--->
         <table>
+            <tr><td>Total Generation</td><td><span class="generation">-</span></td><td>kWh</td></tr>
+            <tr><td>- Consumption</td><td><span class="consumption">-</span></td><td>kWh</td></tr>
+            <tr><td>= Imbalance</td><td><span class="imbalance">-</span></td><td>kWh</td></tr>
             <tr><td>Total Collected</td><td><span class="totalCollected">-</span></td><td>Corrently</td></tr>
             <tr><td>- Converted</td><td><span class="converted">-</span></td><td>Corrently</td></tr>
             <tr><td>= Available</td><td><span class="available">-</span></td><td>Corrently</td></tr>
+            <tr><td>Nominal Generation</td><td><span class="nominalCori">-</span></td><td>kWh/year</td></tr>
+            <tr><td>Valid from</td><td><span class="validFrom">-</span></td><td>(First signed Transaction)</td></tr>
+            <tr><td>Updated</td><td><span class="updated">-</span></td><td>&nbsp;</td></tr>
+        </table>
+        <h3>Transactions</h3>
+        <table id="txs">
         </table>
        <script src="js/vendor/jquery-1.11.2.min.js"></script>
        <script src="js/correntlywallet.js"></script>
