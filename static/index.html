@@ -37,8 +37,28 @@
   </head>
 
   <body>
-
-       <script src="js/vendor/ethers-v4.min.js"></script>       
+        <h1>CorentlyWallet</h1>
+        <p>Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.</p>
+        <h2>Account: <span class="address"></span></h2>
+<!--
+        Yearly Demand:			0 kWh
+        Total Collected:		100 Corrently
+        Converted:			0 Corrently
+        Available:			100 Corrently
+        Valid from:			2018-10-8 16:10:56
+        Nominal Generation:		0 kWh/year
+        Confirmed Generation Equity:	0 kWh/year
+        Metered Generation:		0 kWh
+        Metered Consumption:		0 kWh
+        ./. Imbalance:			0 kWh
+        ETH Balance:			0.0 ETH
+-->
+        <table>
+            <tr><td>Total Collected</td><td><span class="totalCollected">-</span></td><td>Corrently</td></tr>
+            <tr><td>- Converted</td><td><span class="converted">-</span></td><td>Corrently</td></tr>
+            <tr><td>= Available</td><td><span class="available">-</span></td><td>Corrently</td></tr>
+        </table>
+       <script src="js/vendor/jquery-1.11.2.min.js"></script>
        <script src="js/correntlywallet.js"></script>
        <script src="js/main.js"></script>
      <!-- endbuild -->

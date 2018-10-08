@@ -1,6 +1,6 @@
 {
 	"name": "correntlywallet",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market",
 	"keywords": [
 		"ethereum",
@@ -27,7 +27,7 @@
 	"scripts": {
 		"test": "mocha --harmony -r esm --reporter spec tests/index.js",
 		"pretest": "eslint --ignore-path .gitignore src/",
-		"dist": "babel --presets es2015 src --out-dir dist && browserify -o dist/correntlywallet.js ./dist/index.js && browserify -o static/js/correntlywallet.js ./dist/index.js",
+		"dist": "babel --presets es2015 src --out-dir dist && browserify -s CorrentlyWallet -o dist/correntlywallet.js ./dist/index.js && browserify -s CorrentlyWallet -o static/js/correntlywallet.js ./dist/index.js",
 		"doc": "jsdoc -d docs/ src/index.js"
 	},
 	"dependencies": {
