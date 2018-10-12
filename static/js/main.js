@@ -15,6 +15,7 @@ let wallet = null;
 const getAccountInfo=function(address) {
   $('#a').val(address);
   $.getJSON(backend+"totalSupply?account="+address,function(data) {
+      
       $('.totalCollected').html(data.result.totalSupply);
       $('.converted').html(data.result.convertedSupply);
       $('.generation').html(data.result.generation);

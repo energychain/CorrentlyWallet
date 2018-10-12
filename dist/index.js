@@ -14,6 +14,11 @@ Object.defineProperty(exports, "__esModule", {
 var ethers = require('ethers');
 var request = require('request');
 
+if (typeof ethers.providers.getDefaultProvider === 'undefined') {
+  if (typeof ethers.getDefaultProvider !== 'undefined') {
+    ethers.providers.getDefaultProvider = ethers.getDefaultProvider;
+  }
+}
 /**
  * @const CORRENTLY
  * @desc Core Constants for semantics used in decentralized capacity market
