@@ -35,3 +35,8 @@ jobs:
 
       # run tests!
       - run: npm test
+notify:
+  webhooks:
+    # A list of hook hashes, containing the url field
+    # gitter hook
+    - url: https://webhooks.gitter.im/e/534d8e37330fc4488548     
