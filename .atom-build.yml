@@ -6,7 +6,7 @@ targets:
       cmd: "npm run test"
   ContinuesTest:
       cmd: "mocha -w tests/index.js"
-  Build:
+  BuildDistribution:
       cmd: "npm run dist"
   Documentation:
       cmd: "npm run doc"
