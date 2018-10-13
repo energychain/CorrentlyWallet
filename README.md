@@ -7,7 +7,7 @@
 [![CircleCI](https://circleci.com/gh/energychain/CorrentlyWallet.svg?style=svg)](https://circleci.com/gh/energychain/CorrentlyWallet)
 [![CodeFactor](https://www.codefactor.io/repository/github/energychain/correntlywallet/badge)](https://www.codefactor.io/repository/github/energychain/correntlywallet)
 [![HitCount](http://hits.dwyl.io/energychain/CorrentlyWallet.svg)](http://hits.dwyl.io/energychain/CorrentlyWallet)
-![Join the chat at https://gitter.im/corrently/Wallet](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/corrently/Wallet)
+[![Join the chat at https://gitter.im/corrently/Wallet](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/corrently/Wallet)
 ## Motivation
 Using distributed ledger technology it should be easy to buy energy generation capacity (parts of PV plants, Windparks, etc...) and gain value (electricity) from this digital this property.  Aim of CorrentlyWallet is to have a library that takes advantage of Blockchain, Renewable Energy Generation and modern WebTechnology.
 
