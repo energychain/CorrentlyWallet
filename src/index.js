@@ -1,11 +1,9 @@
 /**
+ * Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.
+ * 
  * @module CorrentlyWallet
- * @desc Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market
  */
 
-/**
- *
- */
 const ethers = require('ethers');
 const request = require('request');
 
@@ -114,8 +112,11 @@ ethers.Wallet.prototype.buyCapacity = function(asset, quantity) {
 };
 
 /**
+ * Link confirmed consumption source to wallet.
+ * Any provider or authority might create new demand links. Typical use of this function is after receiving
+ * a demandLink from a provider/utility.
+ *
  * @function linkDemand
-  *@desc Link confirmed consumption source to wallet
  * @param {string} ethereumAddress Address to link with
  */
 ethers.Wallet.prototype.linkDemand = function(ethereumAddress) {
@@ -136,6 +137,44 @@ ethers.Wallet.prototype.linkDemand = function(ethereumAddress) {
     });
   });
 };
+
+/**
+ * Request new Demand Link - This method might be used to tell an energy provider to publish a new deman link for this account.
+ * Typical usage is to set email and provider in options. The given energy provider will get in contact with you to negotiate an offer.
+ * As soon as an energy contract is in place a demanLink will be published and could be used with the function `linkDemand`.
+ *
+ * Typical Options:
+ *  - email: communication address for contract, offer negotiation. Only allowed to be used for this Communication
+ *  - provider: Might be 'stromdao' as contact persion (request will be routed to this provider)
+ *  - yearlyDemand: Kilo-Watt-Hours per Year requested
+ *  - address: Geo-Coded Address for point of consumption
+ *
+ * @function newDemand
+ * @param {object} options Options required for energy  provider to create a demandLink
+ */
+ethers.Wallet.prototype.newDemand = function(data) {
+  let parent = this;
+  return new Promise(function(resolve, reject) {
+    let email = data.email;
+    delete data.email;
+    let transaction = {};
+    if (typeof data.provider === 'undefined') data.provider = 'STROMDAO';
+    transaction.email = email;
+    transaction.options = JSON.stringify(data);
+    let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
+    let signature = parent.sign({data: hash});
+
+    const options = {
+      url: ethers.CORRENTLY.API + 'requestLink?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+      timeout: 20000,
+    };
+    request(options, function(e, r, b) {
+      let results = JSON.parse(b);
+      resolve(results.result);
+    });
+  });
+};
+
 
 /**
  * @function transferCapacity

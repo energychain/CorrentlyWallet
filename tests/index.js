@@ -122,6 +122,13 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
         done();
     });
   });
+  it('request creation of new DemandLink', function(done) {
+    let options = {email:'test@test.com', provider:'stromdao',yearlyDemand:3000,region:'Germany',address:'10117'};
+    wallet.newDemand(options).then(function(transaction) {
+        assert.equal(account.created > 0, true);
+        done();
+    });
+  });
   it('Wait 15 seconds in order to have some generation', function(done) {
     this.timeout(300000);
     setTimeout(function() {

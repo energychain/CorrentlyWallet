@@ -8,6 +8,8 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/energychain/correntlywallet/badge)](https://www.codefactor.io/repository/github/energychain/correntlywallet)
 [![HitCount](http://hits.dwyl.io/energychain/CorrentlyWallet.svg)](http://hits.dwyl.io/energychain/CorrentlyWallet)
 [![Join the chat at https://gitter.im/corrently/Wallet](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/corrently/Wallet)
+[![Coverage Status](https://coveralls.io/repos/github/energychain/CorrentlyWallet/badge.svg?branch=master)](https://coveralls.io/github/energychain/CorrentlyWallet?branch=master)
+
 ## Motivation
 Using distributed ledger technology it should be easy to buy energy generation capacity (parts of PV plants, Windparks, etc...) and gain value (electricity) from this digital this property.  Aim of CorrentlyWallet is to have a library that takes advantage of Blockchain, Renewable Energy Generation and modern WebTechnology.
 
@@ -39,7 +41,7 @@ Households receive 1 Corrently (digital currency) per 1 Kilo-Watt-Hour consumpti
 ### CORI
 A CORI is a ERC20-Token [0x725b190bc077ffde17cf549aa8ba25e298550b18](https://etherscan.io/token/0x725b190bc077ffde17cf549aa8ba25e298550b18) backed by 1 Kilo-Watt-Hour generation per year.
 
-## [API Documentation](https://wallet.corrently.com/)
+## [API Documentation](https://energychain.github.io/CorrentlyWallet/)
 
 ## Contributing
 - https://stromdao.de/

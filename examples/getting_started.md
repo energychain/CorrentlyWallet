@@ -29,4 +29,3 @@ For energy users (customers) this means that they need to get hold of their peek
 Other industries that work with the same method are for example banks when calculating the amount of cash they need to have to customers. Another example are telephone networks that need enough transport capacity to even cover peak loads, while customers tend to pay with a flat fee to build it and not for usage.
 
 ### Trading Energy with Corrently Wallet
-s
