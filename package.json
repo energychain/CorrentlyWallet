@@ -28,7 +28,8 @@
 		"test": "mocha --harmony -r esm --reporter spec tests/index.js",
 		"pretest": "eslint --ignore-path .gitignore src/",
 		"dist": "babel --presets es2015 src --out-dir dist && jsdoc -u examples -c jsdoc.conf.json -d docs/ src/index.js README.md && browserify -s CorrentlyWallet -o dist/correntlywallet.js ./dist/index.js && browserify -s CorrentlyWallet -o static/js/correntlywallet.js ./dist/index.js",
-		"doc": "jsdoc -u examples -c jsdoc.conf.json -d docs/ src/index.js README.md"
+		"doc": "jsdoc -u examples -c jsdoc.conf.json -d docs/ src/index.js README.md",
+		"coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
 	},
 	"dependencies": {
 		"ethers": "3.0.6",
@@ -62,6 +63,7 @@
 		"jscoverage": "^0.6.0",
 		"mocha": "^5.2.0",
 		"mocha-lcov-reporter": "^1.3.0",
+		"nyc": "^13.1.0",
 		"semantic-release": "^15.9.17",
 		"webpack-cli": "^3.1.2"
 	},

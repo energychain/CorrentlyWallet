@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 /**
  * Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.
- * 
+ *
  * @module CorrentlyWallet
  */
 

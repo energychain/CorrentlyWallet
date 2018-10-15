@@ -1,3 +1,5 @@
 node_modules/*
 private/*
 .env
+.coveralls.yml
+
