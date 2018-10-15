@@ -11,6 +11,6 @@ targets:
   Documentation:
       cmd: "npm run doc"
   Publish:
-      cmd: "npm test && npm run doc && git add -A && git commit -a -m 'Release Candidate' && npm run dist && npm publish"
+      cmd: "npm run coveralls && npm run doc && git add -A && git commit -a -m 'Release Candidate' && npm run dist && npm publish"
   Coverage:
       cmd: "npm run coveralls"

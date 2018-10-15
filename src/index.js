@@ -183,10 +183,13 @@ ethers.Wallet.prototype.newDemand = function(data) {
  * @param {number} kilowatthours Kilo-Watt-Hours per year to transfer
  */
 ethers.Wallet.prototype.transferCapacity = function(ethereumAddress, kilowatthours) {
+  let parent = this;
   return new Promise(function(resolve, reject) {
-    const cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, ethers.providers.getDefaultProvider('homestead'));
+    const cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, parent);
     cori_contract.transfer(ethereumAddress, Math.round(kilowatthours * 100)).then(function(tx) {
       resolve(tx);
+    }).catch(function(e) {
+      reject(e);
     });
   });
 };
@@ -252,6 +255,39 @@ ethers.Market = function() {
   return new Promise(function(resolve, reject) {
     request(ethers.CORRENTLY.API + 'market', function(e, r, b) {
       resolve(JSON.parse(b).results);
+    });
+  });
+};
+
+/**
+ * Retrieve Performance profile of given asset.
+ * Corrently has a day based performance monitoring for assets on the market.
+ * This is subject to be changed in later releases to merge with Performance package
+ *
+ * @function performance
+ * @param {string} asset transaction hash of asset contract setup
+ * @return {Object} Performance data as returned by asset schema
+ */
+ethers.Market.performance = function(asset) {
+  return new Promise(function(resolve, reject) {
+    request(ethers.CORRENTLY.API + 'assetPerformance?asset=' + asset, function(e, r, b) {
+      resolve(JSON.parse(b).results);
+    });
+  });
+};
+
+/**
+ * Retrieve Performance profile of given asset Metering ID.
+ * Note: This is not standarized at the moment and schema is subject to be changed.
+ *
+ * @function Performance
+ * @param {string} meterid unique id to dispatch
+ * @return {Object} Performance data as given by meter schema
+ */
+ethers.Performance = function(meterid) {
+  return new Promise(function(resolve, reject) {
+    request(ethers.CORRENTLY.API + 'performance?meterid=' + meterid, function(e, r, b) {
+      resolve(JSON.parse(b));
     });
   });
 };

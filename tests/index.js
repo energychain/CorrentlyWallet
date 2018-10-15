@@ -44,6 +44,7 @@ describe('Consensus validation (CORI and Corrently)', function() {
     wallet._retrieveCoriAccount().then(function(x) {
       assert.equal(x.account,wallet.address);
       assert.equal(x.nominalCori,0);
+      //console.log(x);
       done();
     });
   });
@@ -61,19 +62,14 @@ describe('Consensus validation (CORI and Corrently)', function() {
   });
 });
 describe('Well known Account validation (STROMDAO Demo User)', function() {
-  /*
-  it('Validate earned Corrently and converted to CORI', function(done) {
+  it('Validate if it holds property confirmed in blockchain', function(done) {
     CorrentlyWallet.CorrentlyAccount('0xe596B918cC07852dfA41dd7181492720C261C8E5').then(function(account) {
-        assert.equal(account.totalSupply > 0, true);
-        assert.equal(account.convertedSupply > 0, true);
-        assert.equal(account.nominalCori > 0, true);
-        assert.equal(account.ja > 0, true);
         done();
     });
   });
-  */
-  it('Validate if it holds property confirmed in blockchain', function(done) {
-    CorrentlyWallet.CorrentlyAccount('0xe596B918cC07852dfA41dd7181492720C261C8E5').then(function(account) {
+  it('Validate performance stats (Demand Side)', function(done) {
+    CorrentlyWallet.Performance('EASYMETER_1124001519').then(function(performance) {        
+        assert.equal(performance.length>0,true);
         done();
     });
   });
@@ -106,6 +102,14 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
             }
         }
         assert.equal(supply > 0, true);
+        done();
+    });
+  });
+  it('Retrieve performance Information of well known asset', function(done) {
+      CorrentlyWallet.Market.performance('0xabbd396e4e96517a63a834a3177f8b2809e1bd6682547f1d07bc5bf8073a99d3').then(function(transaction) {
+        assert.equal(transaction.last_day > 0, true);
+        assert.equal(transaction.last_day > (new Date().getTime()/86400000)-7, true);
+        assert.equal(transaction.last_day < (new Date().getTime()/86400000)+1, true);
         done();
     });
   });
@@ -145,6 +149,14 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
   it('Buy more generation capacity than effortable', function(done) {
     wallet.buyCapacity(available_asset, 1000).then(function(transaction) {
         assert.equal(transaction.txs.length === account.txs.length, true);
+        done();
+    });
+  });
+  it('Transfer capacity (fail due to missing gas)', function(done) {
+    wallet.transferCapacity(wallet.address, 1).then(function(transaction) {
+        // This should not happen...
+    }).catch(function(e) {
+        assert.notEqual(e,null);
         done();
     });
   });
