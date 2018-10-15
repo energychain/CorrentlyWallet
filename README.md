@@ -15,13 +15,16 @@ Using distributed ledger technology it should be easy to buy energy generation c
 
 ## Features
 ### No Registration or Identification
-A *wallet* could be generated localy (even in browser) during runtime.
+A *wallet* could be generated localy (even in browser) during runtime. Provides access to latest crypto wallets and privacy protection tactics.
 
 ### OTC/P2P Assignment of generation capacity
-Moving parts (shares) from one entity to another does not require a middleman.
+Moving parts (shares) from one entity to another does not require a middleman. Provides ability to trade locally produced electricity as capacity backed by contracts.
 
-### Public cadastral greenenergy generation register
-Available and covered by Ethereum public blockchain.
+## Decentralized asset registry for energy assets (cadastral)
+A decentralized device registry capable of registering a generation facility with attributes like OEM, capacity,
+operating specs, calibration criterion.
+Providing a reputation score based on the device performance (see performance monitoring);
+Provides mechanism to create blacklist of rogue devices.
 
 ### GDPR compliance (Right to be forgotten)
 Using 'wallet.deleteData(address)' allows to delete all referenced data and destroy bindings.  It requires to have access to privateKey of account. It might be obvious, but this function has **no undo**.
@@ -41,7 +44,7 @@ Households receive 1 Corrently (digital currency) per 1 Kilo-Watt-Hour consumpti
 ### CORI
 A CORI is a ERC20-Token [0x725b190bc077ffde17cf549aa8ba25e298550b18](https://etherscan.io/token/0x725b190bc077ffde17cf549aa8ba25e298550b18) backed by 1 Kilo-Watt-Hour generation per year.
 
-## [API Documentation](https://energychain.github.io/CorrentlyWallet/)
+## [API Documentation/Getting Started](https://energychain.github.io/CorrentlyWallet/)
 
 ## Contributing
 - https://stromdao.de/

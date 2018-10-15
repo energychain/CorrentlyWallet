@@ -44,7 +44,20 @@ describe('Consensus validation (CORI and Corrently)', function() {
     wallet._retrieveCoriAccount().then(function(x) {
       assert.equal(x.account,wallet.address);
       assert.equal(x.nominalCori,0);
-      //console.log(x);
+      done();
+    });
+  });
+  it('Try to set some meta value', function(done) {
+    wallet.setMeta('transition','unit_testing').then(function(x) {
+      assert.equal(x.account,wallet.address);
+      assert.equal(x.updated > new Date().getTime()-8640000,true);
+      done();
+    });
+  });
+  it('Try to get meta from twin', function(done) {
+    account.getMetas().then(function(metas) {      
+      assert.equal(metas.account,wallet.address);
+      assert.equal(metas.updated > new Date().getTime()-8640000,true);
       done();
     });
   });
@@ -68,7 +81,7 @@ describe('Well known Account validation (STROMDAO Demo User)', function() {
     });
   });
   it('Validate performance stats (Demand Side)', function(done) {
-    CorrentlyWallet.Performance('EASYMETER_1124001519').then(function(performance) {        
+    CorrentlyWallet.Performance('EASYMETER_1124001519').then(function(performance) {
         assert.equal(performance.length>0,true);
         done();
     });
