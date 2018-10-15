@@ -1,6 +1,7 @@
 /**
  * Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.
  *
+ * @link https://corrently.com/
  * @module CorrentlyWallet
  */
 
@@ -175,7 +176,6 @@ ethers.Wallet.prototype.newDemand = function(data) {
   });
 };
 
-
 /**
  * @function transferCapacity
   *@desc Transfer generation capacity to another ethereum account
@@ -240,7 +240,7 @@ ethers.Wallet.prototype._retrieveCoriAccount = function() {
 
 ethers.utils._retrieveCoriAccount = function(address) {
   return new Promise(function(resolve, reject) {
-    request(ethers.CORRENTLY.API + 'totalSupply?account=' + address, function(e, r, b) {
+    request(ethers.CORRENTLY.API + 'accountInfo?account=' + address, function(e, r, b) {
       resolve(JSON.parse(b).result);
     });
   });
