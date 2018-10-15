@@ -53,6 +53,19 @@ ethers.CorrentlyAccount = function (address) {
         });
       };
 
+      twin.getMetas = function () {
+        return new Promise(function (resolve2, reject2) {
+          var options = {
+            url: ethers.CORRENTLY.API + 'meta?account=' + address,
+            timeout: 20000
+          };
+          request(options, function (e, r, b) {
+            var results = JSON.parse(b);
+            resolve2(results.result);
+          });
+        });
+      };
+
       resolve(twin);
     });
   });
@@ -147,6 +160,36 @@ ethers.Wallet.prototype.linkDemand = function (ethereumAddress) {
     });
     var options = {
       url: ethers.CORRENTLY.API + 'link?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+      timeout: 20000
+    };
+    request(options, function (e, r, b) {
+      var results = JSON.parse(b);
+      resolve(results.result);
+    });
+  });
+};
+/**
+ * Set Key Value MetaInformation for account
+ * Allows to associate signed meta information to an account which becomes publicly available
+ *
+ * @function setMeta
+ * @param {string} key Of Meta Date
+ * @param {string} value Of Meta Date
+ */
+
+
+ethers.Wallet.prototype.setMeta = function (key, value) {
+  var parent = this;
+  var _key = key;
+  var _value = value;
+  return new Promise(function (resolve, reject) {
+    var transaction = {};
+    var hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
+    var signature = parent.sign({
+      data: hash
+    });
+    var options = {
+      url: ethers.CORRENTLY.API + 'meta?account=' + parent.address + '&key=' + encodeURI(_key) + '&value=' + encodeURI(_value) + '&hash=' + hash + '&signature=' + signature,
       timeout: 20000
     };
     request(options, function (e, r, b) {

@@ -1,79 +1,79 @@
 {
-  "name": "correntlywallet",
-  "version": "0.0.0-development",
-  "description": "Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market",
-  "keywords": [
-    "ethereum",
-    "wallet",
-    "blockchain",
-    "energy",
-    "corrently"
-  ],
-  "homepage": "https://github.com/energychain/CorrentlyWallet#readme",
-  "bugs": {
-    "url": "https://github.com/energychain/CorrentlyWallet/issues"
-  },
-  "license": "Apache-2.0",
-  "author": "Corrently Corp <support@corrently.com>",
-  "main": "dist/index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "tests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/energychain/CorrentlyWallet.git"
-  },
-  "scripts": {
-    "test": "mocha --harmony -r esm --reporter spec tests/index.js",
-    "pretest": "eslint --ignore-path .gitignore src/",
-    "dist": "babel --presets es2015 src --out-dir dist && jsdoc -u examples -c jsdoc.conf.json -d docs/ src/index.js README.md && browserify -s CorrentlyWallet -o dist/correntlywallet.js ./dist/index.js && browserify -s CorrentlyWallet -o static/js/correntlywallet.js ./dist/index.js",
-    "doc": "jsdoc -u examples -c jsdoc.conf.json -d docs/ src/index.js README.md",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "semantic-release": "semantic-release"
-  },
-  "dependencies": {
-    "ethers": "3.0.6",
-    "forever-agent": "^0.6.1",
-    "fs": "0.0.1-security",
-    "har": "^1.0.0",
-    "minify": "^3.0.5",
-    "minimatch": "^3.0.4",
-    "net": "^1.0.2",
-    "request": "^2.88.0",
-    "tls": "0.0.1",
-    "tunnel-agent": "^0.6.0",
-    "uglify": "^0.1.5",
-    "webpack": "^4.20.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "@semantic-release/commit-analyzer": "^6.0.1",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
-    "babelify": "^10.0.0",
-    "blanket": "^1.2.3",
-    "coveralls": "^3.0.2",
-    "eslint": "^5.6.1",
-    "eslint-config-strongloop": "^2.1.0",
-    "eslint-plugin-jasmine": "^2.10.1",
-    "esm": "^3.0.84",
-    "jest": "^23.6.0",
-    "jscover": "^1.0.0",
-    "jscoverage": "^0.6.0",
-    "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^13.1.0",
-    "semantic-release": "^15.9.17",
-    "webpack-cli": "^3.1.2"
-  },
-  "browserify": {
-    "transform": [
-      [
-        "babelify"
-      ]
-    ]
-  }
+	"name": "correntlywallet",
+	"version": "1.0.7-release",
+	"description": "Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market",
+	"keywords": [
+		"ethereum",
+		"wallet",
+		"blockchain",
+		"energy",
+		"corrently"
+	],
+	"homepage": "https://github.com/energychain/CorrentlyWallet#readme",
+	"bugs": {
+		"url": "https://github.com/energychain/CorrentlyWallet/issues"
+	},
+	"license": "Apache-2.0",
+	"author": "Corrently Corp <support@corrently.com>",
+	"main": "dist/index.js",
+	"directories": {
+		"lib": "lib",
+		"test": "tests"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/energychain/CorrentlyWallet.git"
+	},
+	"scripts": {
+		"test": "mocha --harmony -r esm --reporter spec tests/index.js",
+		"pretest": "eslint --ignore-path .gitignore src/",
+		"dist": "babel --presets es2015 src --out-dir dist && jsdoc -u examples -c jsdoc.conf.json -d docs/ src/index.js README.md && browserify -s CorrentlyWallet -o dist/correntlywallet.js ./dist/index.js && browserify -s CorrentlyWallet -o static/js/correntlywallet.js ./dist/index.js",
+		"doc": "jsdoc -u examples -c jsdoc.conf.json -d docs/ src/index.js README.md",
+		"coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+		"semantic-release": "semantic-release"
+	},
+	"dependencies": {
+		"ethers": "3.0.6",
+		"forever-agent": "^0.6.1",
+		"fs": "0.0.1-security",
+		"har": "^1.0.0",
+		"minify": "^3.0.5",
+		"minimatch": "^3.0.4",
+		"net": "^1.0.2",
+		"request": "^2.88.0",
+		"tls": "0.0.1",
+		"tunnel-agent": "^0.6.0",
+		"uglify": "^0.1.5",
+		"webpack": "^4.20.2"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.1.2",
+		"@babel/preset-env": "^7.1.0",
+		"@semantic-release/commit-analyzer": "^6.0.1",
+		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.3",
+		"babel-preset-es2015": "^6.24.1",
+		"babelify": "^10.0.0",
+		"blanket": "^1.2.3",
+		"coveralls": "^3.0.2",
+		"eslint": "^5.6.1",
+		"eslint-config-strongloop": "^2.1.0",
+		"eslint-plugin-jasmine": "^2.10.1",
+		"esm": "^3.0.84",
+		"jest": "^23.6.0",
+		"jscover": "^1.0.0",
+		"jscoverage": "^0.6.0",
+		"mocha": "^5.2.0",
+		"mocha-lcov-reporter": "^1.3.0",
+		"nyc": "^13.1.0",
+		"semantic-release": "^15.9.17",
+		"webpack-cli": "^3.1.2"
+	},
+	"browserify": {
+		"transform": [
+			[
+				"babelify"
+			]
+		]
+	}
 }
