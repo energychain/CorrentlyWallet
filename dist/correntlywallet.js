@@ -10,6 +10,7 @@ Object.defineProperty(exports, "__esModule", {
 /**
  * Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.
  *
+ * @link https://corrently.com/
  * @module CorrentlyWallet
  */
 
@@ -202,10 +203,13 @@ ethers.Wallet.prototype.newDemand = function (data) {
 
 
 ethers.Wallet.prototype.transferCapacity = function (ethereumAddress, kilowatthours) {
+  var parent = this;
   return new Promise(function (resolve, reject) {
-    var cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, ethers.providers.getDefaultProvider('homestead'));
+    var cori_contract = new ethers.Contract(ethers.CORRENTLY.CORI_ADDRESS, ethers.CORRENTLY.ERC20ABI, parent);
     cori_contract.transfer(ethereumAddress, Math.round(kilowatthours * 100)).then(function (tx) {
       resolve(tx);
+    }).catch(function (e) {
+      reject(e);
     });
   });
 };
@@ -256,7 +260,7 @@ ethers.Wallet.prototype._retrieveCoriAccount = function () {
 
 ethers.utils._retrieveCoriAccount = function (address) {
   return new Promise(function (resolve, reject) {
-    request(ethers.CORRENTLY.API + 'totalSupply?account=' + address, function (e, r, b) {
+    request(ethers.CORRENTLY.API + 'accountInfo?account=' + address, function (e, r, b) {
       resolve(JSON.parse(b).result);
     });
   });
@@ -272,6 +276,41 @@ ethers.Market = function () {
   return new Promise(function (resolve, reject) {
     request(ethers.CORRENTLY.API + 'market', function (e, r, b) {
       resolve(JSON.parse(b).results);
+    });
+  });
+};
+/**
+ * Retrieve Performance profile of given asset.
+ * Corrently has a day based performance monitoring for assets on the market.
+ * This is subject to be changed in later releases to merge with Performance package
+ *
+ * @function performance
+ * @param {string} asset transaction hash of asset contract setup
+ * @return {Object} Performance data as returned by asset schema
+ */
+
+
+ethers.Market.performance = function (asset) {
+  return new Promise(function (resolve, reject) {
+    request(ethers.CORRENTLY.API + 'assetPerformance?asset=' + asset, function (e, r, b) {
+      resolve(JSON.parse(b).results);
+    });
+  });
+};
+/**
+ * Retrieve Performance profile of given asset Metering ID.
+ * Note: This is not standarized at the moment and schema is subject to be changed.
+ *
+ * @function Performance
+ * @param {string} meterid unique id to dispatch
+ * @return {Object} Performance data as given by meter schema
+ */
+
+
+ethers.Performance = function (meterid) {
+  return new Promise(function (resolve, reject) {
+    request(ethers.CORRENTLY.API + 'performance?meterid=' + meterid, function (e, r, b) {
+      resolve(JSON.parse(b));
     });
   });
 };
@@ -12252,6 +12291,12 @@ utils.intFromLE = intFromLE;
 
 },{"bn.js":15}],42:[function(require,module,exports){
 module.exports={
+  "_args": [
+    [
+      "elliptic@6.3.3",
+      "/home/zoernert/Development/stromdao/CorrentlyWallet"
+    ]
+  ],
   "_from": "elliptic@6.3.3",
   "_id": "elliptic@6.3.3",
   "_inBundle": false,
@@ -12269,12 +12314,13 @@ module.exports={
     "fetchSpec": "6.3.3"
   },
   "_requiredBy": [
+    "/browserify-sign",
+    "/create-ecdh",
     "/ethers"
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.3.3.tgz",
-  "_shasum": "5482d9646d54bcb89fd7d994fc9e2e9568876e3f",
-  "_spec": "elliptic@6.3.3",
-  "_where": "/home/zoernert/Development/stromdao/CorrentlyWallet/node_modules/ethers",
+  "_spec": "6.3.3",
+  "_where": "/home/zoernert/Development/stromdao/CorrentlyWallet",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -12282,14 +12328,12 @@ module.exports={
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "bn.js": "^4.4.0",
     "brorand": "^1.0.1",
     "hash.js": "^1.0.0",
     "inherits": "^2.0.1"
   },
-  "deprecated": false,
   "description": "EC cryptography",
   "devDependencies": {
     "brfs": "^1.4.3",
@@ -13055,6 +13099,12 @@ if (typeof Object.create === 'function') {
 
 },{}],48:[function(require,module,exports){
 module.exports={
+  "_args": [
+    [
+      "ethers@3.0.6",
+      "/home/zoernert/Development/stromdao/CorrentlyWallet"
+    ]
+  ],
   "_from": "ethers@3.0.6",
   "_id": "ethers@3.0.6",
   "_inBundle": false,
@@ -13075,8 +13125,7 @@ module.exports={
     "/"
   ],
   "_resolved": "http://registry.npmjs.org/ethers/-/ethers-3.0.6.tgz",
-  "_shasum": "54e6bb4468b9baa0ed494bd5e4626018b4d7c00b",
-  "_spec": "ethers@3.0.6",
+  "_spec": "3.0.6",
   "_where": "/home/zoernert/Development/stromdao/CorrentlyWallet",
   "author": {
     "name": "Richard Moore",
@@ -13091,7 +13140,6 @@ module.exports={
   "bugs": {
     "url": "https://github.com/ethers-io/ethers-wallet/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "aes-js": "3.0.0",
     "bn.js": "^4.4.0",
@@ -13104,7 +13152,6 @@ module.exports={
     "uuid": "2.0.1",
     "xmlhttprequest": "1.8.0"
   },
-  "deprecated": false,
   "description": "Ethereum wallet library.",
   "devDependencies": {
     "browserify-zlib": "^0.2.0",
@@ -51253,29 +51300,36 @@ Store.prototype.getAllCookies = function(cb) {
 
 },{}],239:[function(require,module,exports){
 module.exports={
-  "_from": "tough-cookie@~2.4.3",
+  "_args": [
+    [
+      "tough-cookie@2.4.3",
+      "/home/zoernert/Development/stromdao/CorrentlyWallet"
+    ]
+  ],
+  "_from": "tough-cookie@2.4.3",
   "_id": "tough-cookie@2.4.3",
   "_inBundle": false,
   "_integrity": "sha512-Q5srk/4vDM54WJsJio3XNn6K2sCG+CQ8G5Wz6bZhRZoAe/+TxjWB/GlFAnYEbkYVlON9FMk/fE3h2RLpPXo4lQ==",
   "_location": "/tough-cookie",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "tough-cookie@~2.4.3",
+    "raw": "tough-cookie@2.4.3",
     "name": "tough-cookie",
     "escapedName": "tough-cookie",
-    "rawSpec": "~2.4.3",
+    "rawSpec": "2.4.3",
     "saveSpec": null,
-    "fetchSpec": "~2.4.3"
+    "fetchSpec": "2.4.3"
   },
   "_requiredBy": [
-    "/request"
+    "/jsdom",
+    "/request",
+    "/request-promise-native"
   ],
   "_resolved": "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.4.3.tgz",
-  "_shasum": "53f36da3f47783b0925afa06ff9f3b165280f781",
-  "_spec": "tough-cookie@~2.4.3",
-  "_where": "/home/zoernert/Development/stromdao/CorrentlyWallet/node_modules/request",
+  "_spec": "2.4.3",
+  "_where": "/home/zoernert/Development/stromdao/CorrentlyWallet",
   "author": {
     "name": "Jeremy Stashewsky",
     "email": "jstash@gmail.com"
@@ -51283,7 +51337,6 @@ module.exports={
   "bugs": {
     "url": "https://github.com/salesforce/tough-cookie/issues"
   },
-  "bundleDependencies": false,
   "contributors": [
     {
       "name": "Alexander Savin"
@@ -51308,7 +51361,6 @@ module.exports={
     "psl": "^1.1.24",
     "punycode": "^1.4.1"
   },
-  "deprecated": false,
   "description": "RFC6265 Cookies and Cookie Jar for node.js",
   "devDependencies": {
     "async": "^1.4.2",
