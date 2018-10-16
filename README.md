@@ -20,7 +20,7 @@ A *wallet* could be generated localy (even in browser) during runtime. Provides 
 ### OTC/P2P Assignment of generation capacity
 Moving parts (shares) from one entity to another does not require a middleman. Provides ability to trade locally produced electricity as capacity backed by contracts.
 
-## Decentralized asset registry for energy assets (cadastral)
+### Decentralized asset registry for energy assets (cadastral)
 A decentralized device registry capable of registering a generation facility with attributes like OEM, capacity,
 operating specs, calibration criterion.
 Providing a reputation score based on the device performance (see performance monitoring);
