@@ -1,7 +1,6 @@
-# CorrentlyWallet
 ![CorrentlyWallet Eco System](http://corrently.com/assets/img/CorrentlyWallet.draw.png)
 
-**Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.**
+**Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market. Making digital energy infrastructure of tomorrow accessible to anyone today.**
 
 [![npm version](https://badge.fury.io/js/correntlywallet.svg)](https://badge.fury.io/js/correntlywallet) [![Greenkeeper badge](https://badges.greenkeeper.io/energychain/CorrentlyWallet.svg)](https://greenkeeper.io/)
 [ ![Codeship Status for energychain/CorrentlyWallet](https://app.codeship.com/projects/1851a8e0-aa17-0136-d403-2eaeeac4cf7b/status?branch=master)](https://app.codeship.com/projects/309008)
