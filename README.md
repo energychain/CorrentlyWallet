@@ -51,6 +51,9 @@ A CORI is a ERC20-Token [0x725b190bc077ffde17cf549aa8ba25e298550b18](https://eth
 
 ## [API Documentation/Getting Started](https://energychain.github.io/CorrentlyWallet/)
 
+## Corrently Ecosystem
+- [Traded Capacity ](https://app.logz.io/goto/4fbab29a8618a2d199aa0cf674fbcb59?shareToken=3f326dca-3869-4689-b04b-a2a0905ddc62)
+
 ## Contributing
 - https://stromdao.de/
 - https://gitter.im/corrently/Token
