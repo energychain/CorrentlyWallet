@@ -1,5 +1,5 @@
 # CorrentlyWallet
-(http://corrently.com/assets/img/CorrentlyWallet.draw.png)
+![CorrentlyWallet Eco System](http://corrently.com/assets/img/CorrentlyWallet.draw.png)
 
 **Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.**
 
