@@ -58,6 +58,24 @@ ethers.CorrentlyAccount = function(address) {
   });
 };
 
+/**
+ * @function CorrentlyIoT
+  *@desc IoT Wrapper to Corrently-IoT implementation
+ * @param {string} address Address of a thing
+ * @return {number} Value of thing
+ */
+ethers.CorrentlyIoT = function(address) {
+  return new Promise(function(resolve, reject) {
+    const options = {
+      url: ethers.CORRENTLY.API + 'iot?account=' + address,
+      timeout: 20000,
+    };
+    request(options, function(e, r, b) {
+      let results = JSON.parse(b);
+      resolve(results.result.value);
+    });
+  });
+};
 
 /**
  * @function deleteData

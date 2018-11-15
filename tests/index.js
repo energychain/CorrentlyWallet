@@ -47,6 +47,12 @@ describe('Consensus validation (CORI and Corrently)', function() {
       done();
     });
   });
+  it('Retrieve well known IoT value', function(done) {
+     CorrentlyWallet.CorrentlyIoT("0x351dE91E3815f8084b8BF2379D3434Ea3D3be24a").then(function(x) {
+       assert.notEqual(x,0);
+       done();
+     });
+  });
   it('Try to set some meta value', function(done) {
     wallet.setMeta('transition','unit_testing').then(function(x) {
       assert.equal(x.account,wallet.address);
@@ -55,7 +61,7 @@ describe('Consensus validation (CORI and Corrently)', function() {
     });
   });
   it('Try to get meta from twin', function(done) {
-    account.getMetas().then(function(metas) {      
+    account.getMetas().then(function(metas) {
       assert.equal(metas.account,wallet.address);
       assert.equal(metas.updated > new Date().getTime()-8640000,true);
       done();

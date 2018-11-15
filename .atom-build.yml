@@ -11,6 +11,6 @@ targets:
   BuildDistribution:
       cmd: "npm run dist"
   Documentation:
-      cmd: "npm run doc"  
+      cmd: "npm run doc" 
   Coverage:
       cmd: "npm run coveralls"
