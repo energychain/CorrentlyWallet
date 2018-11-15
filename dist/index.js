@@ -64,6 +64,25 @@ ethers.CorrentlyAccount = function (address) {
 };
 
 /**
+ * @function CorrentlyIoT
+  *@desc IoT Wrapper to Corrently-IoT implementation
+ * @param {string} address Address of a thing
+ * @return {number} Value of thing
+ */
+ethers.CorrentlyIoT = function (address) {
+  return new Promise(function (resolve, reject) {
+    var options = {
+      url: ethers.CORRENTLY.API + 'iot?account=' + address,
+      timeout: 20000
+    };
+    request(options, function (e, r, b) {
+      var results = JSON.parse(b);
+      resolve(results.result.value);
+    });
+  });
+};
+
+/**
  * @function deleteData
   *@desc GDPR compliance to delete personal and private data from OTC transactions
  * @param {string} address Address of wallet
