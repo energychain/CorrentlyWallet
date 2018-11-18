@@ -25,7 +25,7 @@ if (typeof ethers.providers.getDefaultProvider === 'undefined') {
 ethers.CORRENTLY = {
   ERC20ABI: require('./ERC20ABI.json'),
   CORI_ADDRESS: '0x725b190bc077ffde17cf549aa8ba25e298550b18',
-  API: 'https://api.corrently.de/'
+  API: 'https://api.corrently.io/'
 };
 
 /**
