@@ -37,7 +37,7 @@
 		"forever-agent": "^0.6.1",
 		"fs": "0.0.1-security",
 		"har": "^1.0.0",
-		"minify": "^3.0.5",
+		"minify": "^4.1.0",
 		"minimatch": "^3.0.4",
 		"net": "^1.0.2",
 		"request": "^2.88.0",
