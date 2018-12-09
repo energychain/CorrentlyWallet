@@ -41,6 +41,11 @@ Using 'wallet.deleteData(address)' allows to delete all referenced data and dest
 npm -i correntlywallet
 ```
 
+### In Browser Usage
+```
+<script src="https://unpkg.com/correntlywallet@1.0.10/dist/correntlywallet.js"></script>
+```
+
 ## Concepts
 
 ### Corrently

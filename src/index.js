@@ -19,6 +19,7 @@ if (typeof ethers.providers.getDefaultProvider === 'undefined') {
  */
 ethers.CORRENTLY = {
   ERC20ABI: require('./ERC20ABI.json'),
+  STROMKONTOABI: require('./STROMKONTOABI.json'),
   CORI_ADDRESS: '0x725b190bc077ffde17cf549aa8ba25e298550b18',
   API: 'https://api.corrently.io/',
 };
@@ -345,6 +346,22 @@ ethers.Market.performance = function(asset) {
 ethers.Performance = function(meterid) {
   return new Promise(function(resolve, reject) {
     request(ethers.CORRENTLY.API + 'performance?meterid=' + meterid, function(e, r, b) {
+      resolve(JSON.parse(b));
+    });
+  });
+};
+
+/**
+ * Retrieve Stromkonto Balances for given account.
+ * Note: This does not retrieve data from BLC - instead it is using Corrently service
+ *
+ * @function Stromkonto
+ * @param {string} meterid unique id to dispatch
+ * @return {Object} Performance data as given by meter schema
+ */
+ethers.Stromkonto = function(account) {
+  return new Promise(function(resolve, reject) {
+    request(ethers.CORRENTLY.API + 'stromkonto?account=' + account, function(e, r, b) {
       resolve(JSON.parse(b));
     });
   });
