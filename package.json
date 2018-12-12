@@ -1,6 +1,6 @@
 {
 	"name": "correntlywallet",
-	"version": "1.0.12",
+	"version": "1.1.1",
 	"description": "Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market",
 	"keywords": [
 		"ethereum",
@@ -33,7 +33,7 @@
 		"semantic-release": "semantic-release"
 	},
 	"dependencies": {
-		"ethers": "3.0.6",
+		"ethers": "^4.0.6",
 		"forever-agent": "^0.6.1",
 		"fs": "0.0.1-security",
 		"har": "^1.0.0",

@@ -30,8 +30,8 @@ describe('Consensus validation (CORI and Corrently)', function() {
   let account=null;
 
   it('Get CORI equity directly linked to wallet (should be 0)', function(done) {
-    wallet = CorrentlyWallet.Wallet.createRandom();
-    wallet.provider=CorrentlyWallet.providers.getDefaultProvider('homestead');
+    wallet = new CorrentlyWallet.Wallet(CorrentlyWallet.Wallet.createRandom().privateKey,CorrentlyWallet.providers.getDefaultProvider('homestead'));
+
     CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(twin) {
         account=twin;
         twin.getCoriEquity().then(function(coriEquity) {
@@ -40,6 +40,7 @@ describe('Consensus validation (CORI and Corrently)', function() {
         });
     });
   });
+
   it('Low-Level validation of digital twin', function(done) {
     wallet._retrieveCoriAccount().then(function(x) {
       assert.equal(x.account,wallet.address);
@@ -79,6 +80,7 @@ describe('Consensus validation (CORI and Corrently)', function() {
       assert.equal(account.txs.length,0);
       done();
   });
+
 });
 describe('Well known Account validation (STROMDAO Demo User)', function() {
   it('Validate if it holds property confirmed in blockchain', function(done) {
@@ -101,8 +103,7 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
   this.timeout(300000);
 
   it('Create new wallet', function(done) {
-    wallet = CorrentlyWallet.Wallet.createRandom();
-    wallet.provider=CorrentlyWallet.providers.getDefaultProvider('homestead');
+    wallet = new CorrentlyWallet.Wallet(CorrentlyWallet.Wallet.createRandom().privateKey,CorrentlyWallet.providers.getDefaultProvider('homestead'));
     CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(_account) {
         account=_account;
         done();
@@ -133,7 +134,7 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
     });
   });
   it('Buy generation capacity', function(done) {
-    wallet.buyCapacity(available_asset, 1).then(function(transaction) {
+    wallet.buyCapacity(available_asset, 1).then(function(transaction) {      
         assert.equal(transaction.txs.length > account.txs.length, true);
         done();
     });

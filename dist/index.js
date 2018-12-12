@@ -95,15 +95,15 @@ ethers.Wallet.prototype.deleteData = function (address) {
     transaction.timeStamp = new Date().getTime();
 
     var hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-    var signature = parent.sign({ data: hash });
-
-    var options = {
-      url: ethers.CORRENTLY.API + 'deleteTwin?&signature=' + signature + '&hash=' + hash + '&transaction=' + encodeURI(JSON.stringify(transaction)),
-      timeout: 20000
-    };
-    request(options, function (e, r, b) {
-      var results = JSON.parse(b);
-      resolve(results);
+    parent.signMessage(hash).then(function (signature) {
+      var options = {
+        url: ethers.CORRENTLY.API + 'deleteTwin?&signature=' + signature + '&hash=' + hash + '&transaction=' + encodeURI(JSON.stringify(transaction)),
+        timeout: 20000
+      };
+      request(options, function (e, r, b) {
+        var results = JSON.parse(b);
+        resolve(results);
+      });
     });
   });
 };
@@ -132,16 +132,16 @@ ethers.Wallet.prototype.buyCapacity = function (asset, quantity) {
         transaction.nonce = account.txs.length;
 
         var hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-        var signature = parent.sign({ data: hash });
-
-        delete parent.twin;
-        var options = {
-          url: ethers.CORRENTLY.API + 'signedTransaction?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
-          timeout: 20000
-        };
-        request(options, function (e, r, b) {
-          var results = JSON.parse(b);
-          resolve(results.result);
+        parent.signMessage(hash).then(function (signature) {
+          delete parent.twin;
+          var options = {
+            url: ethers.CORRENTLY.API + 'signedTransaction?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+            timeout: 20000
+          };
+          request(options, function (e, r, b) {
+            var results = JSON.parse(b);
+            resolve(results.result);
+          });
         });
       });
     });
@@ -162,15 +162,15 @@ ethers.Wallet.prototype.linkDemand = function (ethereumAddress) {
     var transaction = {};
     transaction.link = ethereumAddress;
     var hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-    var signature = parent.sign({ data: hash });
-
-    var options = {
-      url: ethers.CORRENTLY.API + 'link?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
-      timeout: 20000
-    };
-    request(options, function (e, r, b) {
-      var results = JSON.parse(b);
-      resolve(results.result);
+    parent.signMessage(hash).then(function (signature) {
+      var options = {
+        url: ethers.CORRENTLY.API + 'link?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+        timeout: 20000
+      };
+      request(options, function (e, r, b) {
+        var results = JSON.parse(b);
+        resolve(results.result);
+      });
     });
   });
 };
@@ -190,14 +190,15 @@ ethers.Wallet.prototype.setMeta = function (key, value) {
   return new Promise(function (resolve, reject) {
     var transaction = {};
     var hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-    var signature = parent.sign({ data: hash });
-    var options = {
-      url: ethers.CORRENTLY.API + 'meta?account=' + parent.address + '&key=' + encodeURI(_key) + '&value=' + encodeURI(_value) + '&hash=' + hash + '&signature=' + signature,
-      timeout: 20000
-    };
-    request(options, function (e, r, b) {
-      var results = JSON.parse(b);
-      resolve(results.result);
+    parent.signMessage(hash).then(function (signature) {
+      var options = {
+        url: ethers.CORRENTLY.API + 'meta?account=' + parent.address + '&key=' + encodeURI(_key) + '&value=' + encodeURI(_value) + '&hash=' + hash + '&signature=' + signature,
+        timeout: 20000
+      };
+      request(options, function (e, r, b) {
+        var results = JSON.parse(b);
+        resolve(results.result);
+      });
     });
   });
 };
@@ -226,15 +227,15 @@ ethers.Wallet.prototype.newDemand = function (data) {
     transaction.email = email;
     transaction.options = JSON.stringify(data);
     var hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-    var signature = parent.sign({ data: hash });
-
-    var options = {
-      url: ethers.CORRENTLY.API + 'requestLink?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
-      timeout: 20000
-    };
-    request(options, function (e, r, b) {
-      var results = JSON.parse(b);
-      resolve(results.result);
+    parent.signMessage(hash).then(function (signature) {
+      var options = {
+        url: ethers.CORRENTLY.API + 'requestLink?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+        timeout: 20000
+      };
+      request(options, function (e, r, b) {
+        var results = JSON.parse(b);
+        resolve(results.result);
+      });
     });
   });
 };
@@ -272,16 +273,16 @@ ethers.Wallet.prototype.deletePending = function (nonce) {
       transaction.nonce = nonce;
 
       var hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-      var signature = parent.sign({ data: hash });
-
-      delete parent.twin;
-      var options = {
-        url: ethers.CORRENTLY.API + 'deletePending?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
-        timeout: 20000
-      };
-      request(options, function (e, r, b) {
-        var results = JSON.parse(b);
-        resolve(results.result);
+      parent.signMessage(hash).then(function (signature) {
+        delete parent.twin;
+        var options = {
+          url: ethers.CORRENTLY.API + 'deletePending?transaction=' + encodeURI(JSON.stringify(transaction)) + '&hash=' + hash + '&signature=' + signature,
+          timeout: 20000
+        };
+        request(options, function (e, r, b) {
+          var results = JSON.parse(b);
+          resolve(results.result);
+        });
       });
     });
   });
@@ -369,11 +370,10 @@ ethers.Stromkonto = function (account) {
       var res = JSON.parse(b);
       res.transactions = function () {
         return new Promise(function (resolve2, reject2) {
-          var wallet = ethers.Wallet.createRandom();
-          wallet.provider = new ethers.providers.JsonRpcProvider('https://node.corrently.io/', { chainId: 42 });
-          wallet.provider.getBlockNumber().then(function (latest_block) {
+          var provider = new ethers.providers.JsonRpcProvider('https://node.corrently.io/', { chainId: 42 });
+          provider.getBlockNumber().then(function (latest_block) {
             var mytxs = [];
-            wallet.provider.getLogs({
+            provider.getLogs({
               address: '0x8e93e70d8ac18dbaa38dd557acd4901f843e04e3',
               fromBlock: latest_block - 15000,
               topics: ['0x1a71774309711c9c0f58692353c6a0789dbdc71f63e2e42a190ab9bc03f79250']

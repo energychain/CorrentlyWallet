@@ -118,17 +118,16 @@ ethers.Wallet.prototype.deleteData = function(address) {
     transaction.timeStamp = new Date().getTime();
 
     let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-    let signature = parent.sign({data: hash});
-
-    const options = {
-      url: ethers.CORRENTLY.API + 'deleteTwin?&amp;signature=' + signature + '&amp;hash=' + hash + '&amp;transaction=' + encodeURI(JSON.stringify(transaction)),
-      timeout: 20000,
-    };
-    request(options, function(e, r, b) {
-      let results = JSON.parse(b);
-      resolve(results);
+    parent.signMessage(hash).then(function(signature) {
+      const options = {
+        url: ethers.CORRENTLY.API + 'deleteTwin?&amp;signature=' + signature + '&amp;hash=' + hash + '&amp;transaction=' + encodeURI(JSON.stringify(transaction)),
+        timeout: 20000,
+      };
+      request(options, function(e, r, b) {
+        let results = JSON.parse(b);
+        resolve(results);
+      });
     });
-
   });
 };
 
@@ -156,16 +155,16 @@ ethers.Wallet.prototype.buyCapacity = function(asset, quantity) {
         transaction.nonce = account.txs.length;
 
         let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-        let signature = parent.sign({data: hash});
-
-        delete parent.twin;
-        const options = {
-          url: ethers.CORRENTLY.API + 'signedTransaction?transaction=' + encodeURI(JSON.stringify(transaction)) + '&amp;hash=' + hash + '&amp;signature=' + signature,
-          timeout: 20000,
-        };
-        request(options, function(e, r, b) {
-          let results = JSON.parse(b);
-          resolve(results.result);
+        parent.signMessage(hash).then(function(signature) {
+          delete parent.twin;
+          const options = {
+            url: ethers.CORRENTLY.API + 'signedTransaction?transaction=' + encodeURI(JSON.stringify(transaction)) + '&amp;hash=' + hash + '&amp;signature=' + signature,
+            timeout: 20000,
+          };
+          request(options, function(e, r, b) {
+            let results = JSON.parse(b);
+            resolve(results.result);
+          });
         });
       });
     });
@@ -186,15 +185,15 @@ ethers.Wallet.prototype.linkDemand = function(ethereumAddress) {
     let transaction = {};
     transaction.link = ethereumAddress;
     let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-    let signature = parent.sign({data: hash});
-
-    const options = {
-      url: ethers.CORRENTLY.API + 'link?transaction=' + encodeURI(JSON.stringify(transaction)) + '&amp;hash=' + hash + '&amp;signature=' + signature,
-      timeout: 20000,
-    };
-    request(options, function(e, r, b) {
-      let results = JSON.parse(b);
-      resolve(results.result);
+    parent.signMessage(hash).then(function(signature) {
+      const options = {
+        url: ethers.CORRENTLY.API + 'link?transaction=' + encodeURI(JSON.stringify(transaction)) + '&amp;hash=' + hash + '&amp;signature=' + signature,
+        timeout: 20000,
+      };
+      request(options, function(e, r, b) {
+        let results = JSON.parse(b);
+        resolve(results.result);
+      });
     });
   });
 };
@@ -214,14 +213,15 @@ ethers.Wallet.prototype.setMeta = function(key, value) {
   return new Promise(function(resolve, reject) {
     let transaction = {};
     let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-    let signature = parent.sign({data: hash});
-    const options = {
-      url: ethers.CORRENTLY.API + 'meta?account=' + parent.address + '&amp;key=' + encodeURI(_key) + '&amp;value=' + encodeURI(_value) + '&amp;hash=' + hash + '&amp;signature=' + signature,
-      timeout: 20000,
-    };
-    request(options, function(e, r, b) {
-      let results = JSON.parse(b);
-      resolve(results.result);
+    parent.signMessage(hash).then(function(signature) {
+      const options = {
+        url: ethers.CORRENTLY.API + 'meta?account=' + parent.address + '&amp;key=' + encodeURI(_key) + '&amp;value=' + encodeURI(_value) + '&amp;hash=' + hash + '&amp;signature=' + signature,
+        timeout: 20000,
+      };
+      request(options, function(e, r, b) {
+        let results = JSON.parse(b);
+        resolve(results.result);
+      });
     });
   });
 };
@@ -250,15 +250,15 @@ ethers.Wallet.prototype.newDemand = function(data) {
     transaction.email = email;
     transaction.options = JSON.stringify(data);
     let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-    let signature = parent.sign({data: hash});
-
-    const options = {
-      url: ethers.CORRENTLY.API + 'requestLink?transaction=' + encodeURI(JSON.stringify(transaction)) + '&amp;hash=' + hash + '&amp;signature=' + signature,
-      timeout: 20000,
-    };
-    request(options, function(e, r, b) {
-      let results = JSON.parse(b);
-      resolve(results.result);
+    parent.signMessage(hash).then(function(signature) {
+      const options = {
+        url: ethers.CORRENTLY.API + 'requestLink?transaction=' + encodeURI(JSON.stringify(transaction)) + '&amp;hash=' + hash + '&amp;signature=' + signature,
+        timeout: 20000,
+      };
+      request(options, function(e, r, b) {
+        let results = JSON.parse(b);
+        resolve(results.result);
+      });
     });
   });
 };
@@ -296,16 +296,16 @@ ethers.Wallet.prototype.deletePending = function(nonce) {
       transaction.nonce = nonce;
 
       let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
-      let signature = parent.sign({data: hash});
-
-      delete parent.twin;
-      const options = {
-        url: ethers.CORRENTLY.API + 'deletePending?transaction=' + encodeURI(JSON.stringify(transaction)) + '&amp;hash=' + hash + '&amp;signature=' + signature,
-        timeout: 20000,
-      };
-      request(options, function(e, r, b) {
-        let results = JSON.parse(b);
-        resolve(results.result);
+      parent.signMessage(hash).then(function(signature) {
+        delete parent.twin;
+        const options = {
+          url: ethers.CORRENTLY.API + 'deletePending?transaction=' + encodeURI(JSON.stringify(transaction)) + '&amp;hash=' + hash + '&amp;signature=' + signature,
+          timeout: 20000,
+        };
+        request(options, function(e, r, b) {
+          let results = JSON.parse(b);
+          resolve(results.result);
+        });
       });
     });
   });
@@ -393,11 +393,10 @@ ethers.Stromkonto = function(account) {
       let res = JSON.parse(b);
       res.transactions = function() {
         return new Promise(function(resolve2, reject2) {
-          let wallet = ethers.Wallet.createRandom();
-          wallet.provider = new ethers.providers.JsonRpcProvider('https://node.corrently.io/', { chainId: 42 });
-          wallet.provider.getBlockNumber().then(function(latest_block) {
+          let provider = new ethers.providers.JsonRpcProvider('https://node.corrently.io/', { chainId: 42 });
+          provider.getBlockNumber().then(function(latest_block) {
             let mytxs = [];
-            wallet.provider.getLogs({
+            provider.getLogs({
               address: '0x8e93e70d8ac18dbaa38dd557acd4901f843e04e3',
               fromBlock: latest_block - 15000,
               topics: ['0x1a71774309711c9c0f58692353c6a0789dbdc71f63e2e42a190ab9bc03f79250'],
@@ -455,7 +454,7 @@ export default ethers;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 12 2018 10:22:28 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 12 2018 16:30:42 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
