@@ -200,3 +200,15 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
     });
   });
 });
+describe('Stromkonto Handling', function() {
+  it('Retrieve balances (backend)', function(done) {
+    CorrentlyWallet.Stromkonto('0xe596B918cC07852dfA41dd7181492720C261C8E5').then(function(stromkonto) {
+        assert.equal(stromkonto.balance !=0 , true);
+        assert.equal(typeof stromkonto.transactions == 'function',true);
+        stromkonto.transactions().then(function(txs) {
+          assert.equal(txs.length > 0, true);
+          done();
+        });
+    });
+  });
+});

@@ -362,7 +362,50 @@ ethers.Performance = function(meterid) {
 ethers.Stromkonto = function(account) {
   return new Promise(function(resolve, reject) {
     request(ethers.CORRENTLY.API + 'stromkonto?account=' + account, function(e, r, b) {
-      resolve(JSON.parse(b));
+      let res = JSON.parse(b);
+      res.transactions = function() {
+        return new Promise(function(resolve2, reject2) {
+          let wallet = ethers.Wallet.createRandom();
+          wallet.provider = new ethers.providers.JsonRpcProvider('https://node.corrently.io/', { chainId: 42 });
+          wallet.provider.getBlockNumber().then(function(latest_block) {
+            let mytxs = [];
+            wallet.provider.getLogs({
+              address: '0x8e93e70d8ac18dbaa38dd557acd4901f843e04e3',
+              fromBlock: latest_block - 15000,
+              topics: ['0x1a71774309711c9c0f58692353c6a0789dbdc71f63e2e42a190ab9bc03f79250'],
+            }).then(function(l) {
+              l = l.reverse();
+              for (var i = 0; i < l.length; i++) {
+                let item = l[i];
+                item.data = item.data.substr(2);
+                item.from = '0x' + item.data.substr(24, 40);
+                item.to = '0x' + item.data.substr(88, 40);
+                item.value = parseInt(item.data.substr(128, 64), 16) / 100000;
+                item.base = parseInt(item.data.substr(192, 64), 16) / 1000;
+                l[i] = item;
+                if ((item.from === ('' + account).toLowerCase()) || (item.to === ('' + account).toLowerCase())) {
+                  if ((item.from === ('' + account).toLowerCase())) {
+                    item.peer = item.to;
+                    item.value_abs = item.value * -1;
+                    item.base_abs = item.base * -1;
+                  } else {
+                    item.peer = item.from;
+                    item.value_abs = item.value;
+                    item.base_abs = item.base;
+                  }
+                  item.value_abs = (item.value_abs.toFixed(5) + '').replace('.', ',');
+                  item.base_abs = (item.base_abs.toFixed(3) + '').replace('.', ',');
+                  if (item.peer === '0x445c1e284c15a50a69fe7d6dcd9fba3b938b52bb') item.base_abs = '';
+                  mytxs.push(item);
+                }
+              }
+              resolve2(mytxs);
+            });
+          });
+        });
+      };
+
+      resolve(res);
     });
   });
 };
