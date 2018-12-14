@@ -56,7 +56,7 @@ ethers.CorrentlyAccount = function(address) {
       };
       twin.getStromkonto = function() {
         return ethers.Stromkonto(address);
-      }
+      };
       resolve(twin);
     });
   });

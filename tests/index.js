@@ -214,10 +214,11 @@ describe('Stromkonto Handling', function() {
     });
   });
   it('Retrieve balances (via Acount)', function(done) {
-    CorrentlyWallet.CorrentlyAccount(wallet.address).then(function(_account) {
+    CorrentlyWallet.CorrentlyAccount('0xe596B918cC07852dfA41dd7181492720C261C8E5').then(function(_account) {
           _account.getStromkonto().then(function(stromkonto) {
             assert.equal(stromkonto.balance !=0 , true);
             assert.equal(typeof stromkonto.transactions == 'function',true);
+            done();
         })
     });
   });
