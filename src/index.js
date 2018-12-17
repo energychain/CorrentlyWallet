@@ -21,7 +21,7 @@ ethers.CORRENTLY = {
   ERC20ABI: require('./ERC20ABI.json'),
   STROMKONTOABI: require('./STROMKONTOABI.json'),
   CORI_ADDRESS: '0x725b190bc077ffde17cf549aa8ba25e298550b18',
-  API: 'https://api.corrently.io/',
+  API: 'https://api.corrently.io/core/',
 };
 
 /**
