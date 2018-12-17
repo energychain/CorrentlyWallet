@@ -1,6 +1,6 @@
 {
 	"name": "correntlywallet",
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"description": "Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market",
 	"keywords": [
 		"ethereum",
@@ -33,7 +33,7 @@
 		"semantic-release": "semantic-release"
 	},
 	"dependencies": {
-		"ethers": "^4.0.19",
+		"ethers": "^4.0.20",
 		"forever-agent": "^0.6.1",
 		"fs": "0.0.1-security",
 		"har": "^1.0.0",
@@ -44,11 +44,11 @@
 		"tls": "0.0.1",
 		"tunnel-agent": "^0.6.0",
 		"uglify": "^0.1.5",
-		"webpack": "^4.20.2"
+		"webpack": "^4.26.1"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.1.2",
-		"@babel/preset-env": "^7.1.0",
+		"@babel/core": "^7.2.2",
+		"@babel/preset-env": "^7.2.0",
 		"@semantic-release/commit-analyzer": "^6.0.1",
 		"babel-cli": "^6.26.0",
 		"babel-core": "^6.26.3",
