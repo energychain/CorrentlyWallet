@@ -415,12 +415,19 @@ module.exports=[
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
 /**
  * Ethereum Blockchain Wallet implementing Green Energy semantics for Corrently based decentralized capacity market.
  *
  * @link https://corrently.com/
  * @module CorrentlyWallet
  */
+
 
 var ethers = require('ethers');
 
@@ -536,24 +543,26 @@ ethers.Wallet.prototype.deleteData = function (address) {
  */
 
 
-ethers.Wallet.prototype.buyCapacity = function (asset, quantity) {
+ethers.Wallet.prototype.buyCapacity = function (asset, quantity, funding) {
+  if ((typeof asset === 'undefined' ? 'undefined' : _typeof(asset)) === 'object' && typeof asset.assset !== 'undefined') {
+    asset = asset.asset;
+  }
+
   var parent = this;
   return new Promise(function (resolve, reject) {
     parent._retrieveCoriAccount().then(function (account) {
       ethers.Market().then(function (market) {
         var transaction = {};
         transaction.cori = quantity;
-
-        for (var i = 0; i < market.length; i++) {
-          if (market[i].asset === asset.asset || market[i].asset === asset.contract || market[i].contract === asset.contract || market[i].contract === asset.asset) {
-            transaction.corrently = market[i].cori * quantity;
-          }
-        }
-
         transaction.timeStamp = new Date().getTime();
-        transaction.asset = asset.contract;
+        transaction.asset = asset;
         transaction.eth = 0;
         transaction.nonce = account.txs.length;
+
+        if (typeof funding !== 'undefined' && funding !== null) {
+          transaction.funding = funding;
+        }
+
         var hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
         parent.signMessage(hash).then(function (signature) {
           delete parent.twin;

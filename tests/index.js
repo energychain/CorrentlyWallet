@@ -134,7 +134,7 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
     });
   });
   it('Buy generation capacity', function(done) {
-    wallet.buyCapacity(available_asset, 1).then(function(transaction) {
+    wallet.buyCapacity(available_asset.asset, 1).then(function(transaction) {
         assert.equal(transaction.txs.length > account.txs.length, true);
         done();
     });
@@ -167,7 +167,7 @@ describe('Use Case: Buy Capacity Over The Counter (OTC)', function() {
     });
   });
   it('Buy more generation capacity than effortable', function(done) {
-    wallet.buyCapacity(available_asset, 1000).then(function(transaction) {
+    wallet.buyCapacity(available_asset.asset, 1000).then(function(transaction) {
         assert.equal(transaction.txs.length === account.txs.length, true);
         done();
     });
