@@ -120,7 +120,7 @@ ethers.Wallet.prototype.buyCapacity = function(asset, quantity) {
         let transaction = {};
         transaction.cori = quantity;
         for (let i = 0; i < market.length; i++) {
-          if (market[i].asset === asset.asset) {
+          if ((market[i].asset === asset.asset) || (market[i].asset === asset.contract) || (market[i].contract === asset.contract) || (market[i].contract === asset.asset)) {
             transaction.corrently = market[i].cori * quantity;
           }
         }
