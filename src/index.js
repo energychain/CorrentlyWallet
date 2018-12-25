@@ -112,23 +112,23 @@ ethers.Wallet.prototype.deleteData = function(address) {
  * @param {string} asset Address Contract to buy from
  * @param {number} quantity Amount of capacity to buy
  */
-ethers.Wallet.prototype.buyCapacity = function(asset, quantity) {
+ethers.Wallet.prototype.buyCapacity = function(asset, quantity,funding) {
+  if((typeof asset == 'object') && (typeof asset.assset != 'undefined') {
+    asset = asset.asset;
+  }
   let parent = this;
   return new Promise(function(resolve, reject) {
     parent._retrieveCoriAccount().then(function(account) {
       ethers.Market().then(function(market) {
         let transaction = {};
         transaction.cori = quantity;
-        for (let i = 0; i < market.length; i++) {
-          if ((market[i].asset === asset.asset) || (market[i].asset === asset.contract) || (market[i].contract === asset.contract) || (market[i].contract === asset.asset)) {
-            transaction.corrently = market[i].cori * quantity;
-          }
-        }
         transaction.timeStamp = new Date().getTime();
-        transaction.asset = asset.contract;
+        transaction.asset = asset;
         transaction.eth = 0;
         transaction.nonce = account.txs.length;
-
+        if((typeof funding != "undefined") && (funding != null) {
+          transaction.funding = funding;
+        }
         let hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(transaction)));
         parent.signMessage(hash).then(function(signature) {
           delete parent.twin;
