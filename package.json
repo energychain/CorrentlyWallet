@@ -59,7 +59,7 @@
 		"eslint": "^5.6.1",
 		"eslint-config-strongloop": "^2.1.0",
 		"eslint-plugin-jasmine": "^2.10.1",
-		"esm": "^3.0.84",
+		"esm": "^3.2.10",
 		"jest": "^23.6.0",
 		"jscover": "^1.0.0",
 		"jscoverage": "^0.6.0",
