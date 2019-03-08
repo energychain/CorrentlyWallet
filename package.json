@@ -33,7 +33,7 @@
 		"semantic-release": "semantic-release"
 	},
 	"dependencies": {
-		"ethers": "^4.0.20",
+		"ethers": "^4.0.27",
 		"forever-agent": "^0.6.1",
 		"fs": "0.0.1-security",
 		"har": "^1.0.0",
