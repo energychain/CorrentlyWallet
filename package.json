@@ -48,7 +48,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.5.0",
-		"@babel/preset-env": "^7.2.0",
+		"@babel/preset-env": "^7.5.2",
 		"@semantic-release/commit-analyzer": "^6.0.1",
 		"babel-cli": "^6.26.0",
 		"babel-core": "^6.26.3",
