@@ -58,7 +58,7 @@
 		"coveralls": "^3.0.2",
 		"eslint": "^5.6.1",
 		"eslint-config-strongloop": "^2.1.0",
-		"eslint-plugin-jasmine": "^2.10.1",
+		"eslint-plugin-jasmine": "^4.1.1",
 		"esm": "^3.0.84",
 		"jest": "^23.6.0",
 		"jscover": "^1.0.0",
