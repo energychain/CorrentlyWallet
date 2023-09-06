@@ -36,7 +36,7 @@
 		"ethers": "^4.0.20",
 		"forever-agent": "^0.6.1",
 		"fs": "0.0.1-security",
-		"har": "^1.0.0",
+		"har": "^1.0.14",
 		"minify": "^3.0.5",
 		"minimatch": "^3.0.4",
 		"net": "^1.0.2",
